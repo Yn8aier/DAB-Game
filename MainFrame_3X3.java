@@ -38,6 +38,16 @@ public class MainFrame_3X3 extends JFrame {
     public static int gamemode;
     private Color currentColor;
 
+    public static int getPlayer() {
+        return player;
+    }
+
+    public static void setPlayer(int player) {
+        MainFrame_3X3.player = player;
+    }
+
+    private static int player = -1;
+
     public MainFrame_3X3() {
         super();
         initializeGUI();
@@ -103,45 +113,60 @@ public class MainFrame_3X3 extends JFrame {
             if (component instanceof EdgeComponent) {
                 EdgeComponent edgeComponent = (EdgeComponent) component;
                 if (edgeComponent.isFree()) {
-
-                    currentColor = Color.RED;
-                    edgeComponent.setColor(currentColor);
-                    edgeComponent.setFree(false);
-                    edgeComponent.setVisible(true);
-                    edgeComponent.repaint();
-
+                    if(player == 1){
+                        currentColor = Color.RED;
+                    }else{
+                        currentColor = Color.BLUE;
+                    }
                     if(GameStart.gamemode == 1){
+                        currentColor = Color.RED;
+                        if(player == 1){
+                            currentColor = Color.RED;
+                        }else{
+                            currentColor = Color.BLUE;
+                        }
                         for(int i = 0; i < GUIedges.size(); i++){
                             if(GUIedges.get(i).equals(edgeComponent)){
                                 kernal3X3_HU_VS_MA.updateArrays(i);
                                 kernal3X3_HU_VS_MA.order.add(i);
-                                if (kernal3X3_HU_VS_MA.testFour(kernal3X3_HU_VS_MA.currX, kernal3X3_HU_VS_MA.currY, kernal3X3_HU_VS_MA.player) == true) {
+                                if (kernal3X3_HU_VS_MA.testFour(kernal3X3_HU_VS_MA.currX, kernal3X3_HU_VS_MA.currY, player) == true) {
 
                                 } else {
-                                    kernal3X3_HU_VS_MA.player++;
+                                    player++;
                                 }
                             }
                         }
                     }
-
                     if(GameStart.gamemode == 2){
-
+                        if(player == 1){
+                            currentColor = Color.RED;
+                        }else{
+                            currentColor = Color.BLUE;
+                        }
                         for(int i = 0; i < GUIedges.size(); i++){
                             if(GUIedges.get(i).equals(edgeComponent)){
-                                kernal3X3_HU_VS_MA.updateArrays(i);
-                                kernal3X3_HU_VS_MA.order.add(i);
-                                if (kernal3X3_HU_VS_MA.testFour(kernal3X3_HU_VS_MA.currX, kernal3X3_HU_VS_MA.currY, kernal3X3_HU_VS_MA.player) == true) {
+                                kernal3X3_HU_VS_HU.updateArrays(i);
+                                kernal3X3_HU_VS_HU.order.add(i);
+                                if (kernal3X3_HU_VS_HU.testFour(kernal3X3_HU_VS_HU.currX, kernal3X3_HU_VS_HU.currY, player) == true) {
 
                                 } else {
-                                    if(kernal3X3_HU_VS_HU.player == 1){
-                                        kernal3X3_HU_VS_MA.player++;
+                                    if(player == 1){
+                                        player++;
+
                                     }else{
-                                        kernal3X3_HU_VS_HU.player--;
+                                        player--;
                                     }
                                 }
                             }
                         }
                     }
+                    edgeComponent.setColor(currentColor);
+                    edgeComponent.setFree(false);
+                    edgeComponent.setVisible(true);
+                    edgeComponent.repaint();
+
+
+
 
 
                 }
@@ -158,6 +183,11 @@ public class MainFrame_3X3 extends JFrame {
             for (EdgeComponent e : GUIedges) {
                 if (e.isFree()) {
                     if (e == component) {
+                        if(player == 1){
+                            currentColor = Color.RED;
+                        }else{
+                            currentColor = Color.BLUE;
+                        }
                         e.setColor(currentColor);
                         e.setVisible(true);
                     } else {

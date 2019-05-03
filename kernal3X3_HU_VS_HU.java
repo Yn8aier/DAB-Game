@@ -1,5 +1,7 @@
 package Project;
 
+import Study.MainFrame;
+
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -39,7 +41,6 @@ public class kernal3X3_HU_VS_HU {
 
     //To determine player NO.1 or NO.2
     //default: 0 for human (player 1)
-    public static int player = 0;
     //points of both player
     //default: Player1 is human
     private static int scoreOfPlayer1 = 0;
@@ -230,10 +231,10 @@ public class kernal3X3_HU_VS_HU {
                 break;
             }
         }
-        if (testFour(currX, currY, player) == true) {
+        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
         } else {
-            player++;
+            MainFrame_3X3.setPlayer(2);
         }
 
     }
@@ -254,10 +255,10 @@ public class kernal3X3_HU_VS_HU {
                 break;
             }
         }
-        if (testFour(currX, currY, player) == true) {
+        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
         } else {
-            player--;
+            MainFrame_3X3.setPlayer(1);
         }
 
     }
@@ -292,7 +293,7 @@ public class kernal3X3_HU_VS_HU {
         bReader.close();
         String str = buffer.toString();
         String[] SavedOrders = str.split(" ");
-        player = Integer.parseInt(SavedOrders[0]);
+        MainFrame_3X3.setPlayer(Integer.parseInt(SavedOrders[0]));
         for (int i = 1; i < SavedOrders.length; i++) {
             if (SavedOrders[i].equals("-1")) {
                 break;
@@ -311,17 +312,17 @@ public class kernal3X3_HU_VS_HU {
 //        }
         for (int i = 0; i < order.size(); i++) {
             updateArrays(order.get(i));
-            if (testFour(currX, currY, player) == true) {
+            if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 //                if(player == 1){
 //                    scoreOfPlayer1++;
 //                }else{
 //                    scoreOfPlayer2++;
 //                }
             } else {
-                if (player == 1) {
-                    player++;
+                if (MainFrame_3X3.getPlayer() == 1) {
+                    MainFrame_3X3.setPlayer(2);
                 } else {
-                    player--;
+                    MainFrame_3X3.setPlayer(1);
                 }
             }
         }
@@ -331,7 +332,7 @@ public class kernal3X3_HU_VS_HU {
 
     public void fileWrite() throws Exception {
         String OUT = "";
-        OUT = OUT + player + " ";
+        OUT = OUT + MainFrame_3X3.getPlayer() + " ";
         for (int i = 0; i < order.size(); i++) {
             OUT = OUT + order.get(i) + " ";
             if (i == order.size() - 1) {
@@ -365,7 +366,8 @@ public class kernal3X3_HU_VS_HU {
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
                     "1 for player and 2 for computer");
-            player = in.nextInt();
+            int anumber = in.nextInt();
+            MainFrame_3X3.setPlayer(anumber);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -438,7 +440,8 @@ public class kernal3X3_HU_VS_HU {
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
                     "1 for player and 2 for computer");
-            player = in.nextInt();
+            int anumber = in.nextInt();
+            MainFrame_3X3.setPlayer(anumber);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -465,6 +468,15 @@ public class kernal3X3_HU_VS_HU {
 //                game.computer2Play();
 //                TimeUnit.SECONDS.sleep(1);
 //            }
+//            if(player == 1){
+//                System.out.println("Player1 playing");
+//                TimeUnit.SECONDS.sleep(1);
+//            }else{
+//                System.out.println("Player2 playing");
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+
+            TimeUnit.SECONDS.sleep(1);
 
             game.show(vectors2D);
             System.out.println("\n");

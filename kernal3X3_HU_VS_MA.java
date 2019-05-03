@@ -39,7 +39,6 @@ public class kernal3X3_HU_VS_MA {
 
     //To determine player NO.1 or NO.2
     //default: 0 for human (player 1)
-    public static int player;
     //points of both player
     //default: Player1 is human
     private static int scoreOfPlayer1 = 0;
@@ -230,10 +229,10 @@ public class kernal3X3_HU_VS_MA {
                 break;
             }
         }
-        if (testFour(currX, currY, player) == true) {
+        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
         } else {
-            player++;
+            MainFrame_3X3.setPlayer(2);
         }
 
     }
@@ -254,10 +253,10 @@ public class kernal3X3_HU_VS_MA {
                 break;
             }
         }
-        if (testFour(currX, currY, player) == true) {
+        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
         } else {
-            player--;
+            MainFrame_3X3.setPlayer(1);
         }
 
     }
@@ -292,7 +291,7 @@ public class kernal3X3_HU_VS_MA {
         bReader.close();
         String str = buffer.toString();
         String[] SavedOrders = str.split(" ");
-        player = Integer.parseInt(SavedOrders[0]);
+        MainFrame_3X3.setPlayer(Integer.parseInt(SavedOrders[0]));
         for (int i = 1; i < SavedOrders.length; i++) {
             if (SavedOrders[i].equals("-1")) {
                 break;
@@ -311,17 +310,17 @@ public class kernal3X3_HU_VS_MA {
 //        }
         for (int i = 0; i < order.size(); i++) {
             updateArrays(order.get(i));
-            if (testFour(currX, currY, player) == true) {
+            if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 //                if(player == 1){
 //                    scoreOfPlayer1++;
 //                }else{
 //                    scoreOfPlayer2++;
 //                }
             } else {
-                if (player == 1) {
-                    player++;
+                if (MainFrame_3X3.getPlayer() == 1) {
+                    MainFrame_3X3.setPlayer(2);
                 } else {
-                    player--;
+                    MainFrame_3X3.setPlayer(1);
                 }
             }
         }
@@ -331,7 +330,7 @@ public class kernal3X3_HU_VS_MA {
 
     public void fileWrite() throws Exception {
         String OUT = "";
-        OUT = OUT + player + " ";
+        OUT = OUT + MainFrame_3X3.getPlayer() + " ";
         for (int i = 0; i < order.size(); i++) {
             OUT = OUT + order.get(i) + " ";
             if (i == order.size() - 1) {
@@ -364,7 +363,8 @@ public class kernal3X3_HU_VS_MA {
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
                     "1 for player and 2 for computer");
-            player = in.nextInt();
+            int anumber = in.nextInt();
+            MainFrame_3X3.setPlayer(anumber);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -385,7 +385,7 @@ public class kernal3X3_HU_VS_MA {
 //            }
 
             //Human VS. Machine Mode: 1 for human and 2 for computer
-            if(player == 1){
+            if(MainFrame_3X3.getPlayer() == 1){
 
             }else{
                 game.computer2Play();
@@ -438,7 +438,8 @@ public class kernal3X3_HU_VS_MA {
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
                     "1 for player and 2 for computer");
-            player = in.nextInt();
+            int anumber = in.nextInt();
+            MainFrame_3X3.setPlayer(anumber);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -459,7 +460,7 @@ public class kernal3X3_HU_VS_MA {
 //            }
 
             //Human VS. Machine Mode: 1 for human and 2 for computer
-            if(player == 1){
+            if(MainFrame_3X3.getPlayer() == 1){
 
             }else{
                 game.computer2Play();

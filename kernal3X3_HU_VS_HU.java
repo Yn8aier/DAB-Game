@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class kernal3X3_HU_VS_HU {
     //    private List<Edge> edges = new ArrayList<>();
     //    private List<Dot> dots = new ArrayList<>();
-    private ArrayList<Edge> edges = new ArrayList<>();
-    private ArrayList<Dot> dots = new ArrayList<>();
+//    private ArrayList<Edge> edges = new ArrayList<>();
+//    private ArrayList<Dot> dots = new ArrayList<>();
     private Color currentColor = Color.RED;
     //      sthe coordinrray
     //      private Arate of current edge in array NO.2

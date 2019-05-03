@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class kernal3X3_MA_VS_MA {
     //    private List<Edge> edges = new ArrayList<>();
     //    private List<Dot> dots = new ArrayList<>();
-    private ArrayList<Edge> edges = new ArrayList<>();
-    private ArrayList<Dot> dots = new ArrayList<>();
+//    private ArrayList<Edge> edges = new ArrayList<>();
+//    private ArrayList<Dot> dots = new ArrayList<>();
     private Color currentColor = Color.RED;
     //      sthe coordinrray
     //      private Arate of current edge in array NO.2

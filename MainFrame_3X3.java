@@ -5,6 +5,7 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class MainFrame_3X3 extends JFrame {
 
@@ -34,6 +35,7 @@ public class MainFrame_3X3 extends JFrame {
 
     private static ArrayList<EdgeComponent> GUIedges = new ArrayList<>();
     private static ArrayList<DotComponent> GUIdots = new ArrayList<>();
+    public static int gamemode;
     private Color currentColor;
 
     public MainFrame_3X3() {
@@ -94,30 +96,53 @@ public class MainFrame_3X3 extends JFrame {
 
 
                 @Override
-        public void mouseClicked(MouseEvent event){
+        public void mouseClicked(MouseEvent event) {
             //detect the mouse click event
             event = SwingUtilities.convertMouseEvent(MainFrame_3X3.this, event, getContentPane());
             Component component = getContentPane().getComponentAt(event.getPoint());
             if (component instanceof EdgeComponent) {
                 EdgeComponent edgeComponent = (EdgeComponent) component;
                 if (edgeComponent.isFree()) {
+
                     currentColor = Color.RED;
                     edgeComponent.setColor(currentColor);
                     edgeComponent.setFree(false);
                     edgeComponent.setVisible(true);
                     edgeComponent.repaint();
 
-                    for(int i = 0; i < GUIedges.size(); i++){
-                        if(GUIedges.get(i).equals(edgeComponent)){
-                            kernal3X3_HU_VS_MA.updateArrays(i);
-                            kernal3X3_HU_VS_MA.order.add(i);
-                            if (kernal3X3_HU_VS_MA.testFour(kernal3X3_HU_VS_MA.currX, kernal3X3_HU_VS_MA.currY, kernal3X3_HU_VS_MA.player) == true) {
+                    if(GameStart.gamemode == 1){
+                        for(int i = 0; i < GUIedges.size(); i++){
+                            if(GUIedges.get(i).equals(edgeComponent)){
+                                kernal3X3_HU_VS_MA.updateArrays(i);
+                                kernal3X3_HU_VS_MA.order.add(i);
+                                if (kernal3X3_HU_VS_MA.testFour(kernal3X3_HU_VS_MA.currX, kernal3X3_HU_VS_MA.currY, kernal3X3_HU_VS_MA.player) == true) {
 
-                            } else {
-                                kernal3X3_HU_VS_MA.player++;
+                                } else {
+                                    kernal3X3_HU_VS_MA.player++;
+                                }
                             }
                         }
                     }
+
+                    if(GameStart.gamemode == 2){
+
+                        for(int i = 0; i < GUIedges.size(); i++){
+                            if(GUIedges.get(i).equals(edgeComponent)){
+                                kernal3X3_HU_VS_MA.updateArrays(i);
+                                kernal3X3_HU_VS_MA.order.add(i);
+                                if (kernal3X3_HU_VS_MA.testFour(kernal3X3_HU_VS_MA.currX, kernal3X3_HU_VS_MA.currY, kernal3X3_HU_VS_MA.player) == true) {
+
+                                } else {
+                                    if(kernal3X3_HU_VS_HU.player == 1){
+                                        kernal3X3_HU_VS_MA.player++;
+                                    }else{
+                                        kernal3X3_HU_VS_HU.player--;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
 
                 }
             }

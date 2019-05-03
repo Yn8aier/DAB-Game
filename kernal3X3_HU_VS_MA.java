@@ -350,11 +350,10 @@ public class kernal3X3_HU_VS_MA {
 
 
     public static void main(String[] args) throws Exception {
-
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
         kernal3X3_HU_VS_MA game = new kernal3X3_HU_VS_MA();
-        
+
         //Machine VS. Machine: Lock the mouse
 //        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
 //            MainFrame_3X3.getGUIedges().get(i).setFree(false);
@@ -364,7 +363,7 @@ public class kernal3X3_HU_VS_MA {
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
+                    "1 for player and 2 for computer");
             player = in.nextInt();
         } else {
             game.fileread();
@@ -399,9 +398,83 @@ public class kernal3X3_HU_VS_MA {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 is:");
+        System.out.println("Score of PLayer1 (human player) is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
+        System.out.println("Score of Player2 (computer) is:");
+        System.out.println(scoreOfPlayer2 + "\n");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Do you want to save this game?\n" +
+                "yes or no");
+        String DoSave = "";
+        for(;;){
+            DoSave = in.nextLine();
+            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
+                break;
+            }
+        }
+        if (DoSave.toLowerCase().equals("no")) {
+        } else {
+            game.fileWrite();
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("Game Saved");
+        }
+        System.out.println("\nGame Over");
+
+
+    }
+
+    public static void HU_vs_MA() throws Exception{
+        mainframe.setVisible(true);
+        Scanner in = new Scanner(System.in);
+        kernal3X3_HU_VS_MA game = new kernal3X3_HU_VS_MA();
+
+        //Machine VS. Machine: Lock the mouse
+//        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
+//            MainFrame_3X3.getGUIedges().get(i).setFree(false);
+//        }
+
+        System.out.println("New Game? Please input yes or no");
+        String newgame = in.nextLine();
+        if (newgame.toLowerCase().equals("yes")) {
+            System.out.println("Which one do you want to play first?\n" +
+                    "1 for player and 2 for computer");
+            player = in.nextInt();
+        } else {
+            game.fileread();
+            game.SavedPlay();
+            game.show(vectors2D);
+        }
+        for (; ; ) {
+            if (isfull(order) == true) {
+                break;
+            }
+//          Machine VS. Machine Mode
+
+//            if (player == 1) {
+//                game.computer1Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            } else {
+//                game.computer2Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+
+            //Human VS. Machine Mode: 1 for human and 2 for computer
+            if(player == 1){
+
+            }else{
+                game.computer2Play();
+                TimeUnit.SECONDS.sleep(1);
+            }
+
+            game.show(vectors2D);
+            System.out.println("\n");
+            if (isfull(order) == true) {
+                break;
+            }
+        }
+        System.out.println("Score of PLayer1 (human player) is:");
+        System.out.println(scoreOfPlayer1 + "\n");
+        System.out.println("Score of Player2 (computer) is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +

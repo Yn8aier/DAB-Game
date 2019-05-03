@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class kernal3X3_MA_VS_MA {
+public class kernal3X3_HU_VS_HU {
     //    private List<Edge> edges = new ArrayList<>();
     //    private List<Dot> dots = new ArrayList<>();
     private ArrayList<Edge> edges = new ArrayList<>();
@@ -15,8 +15,8 @@ public class kernal3X3_MA_VS_MA {
     private Color currentColor = Color.RED;
     //      sthe coordinrray
     //      private Arate of current edge in array NO.2
-    private static int currX = 0;
-    private static int currY = 0;
+    public static int currX = 0;
+    public static int currY = 0;
     //    The first arayList<String> coordinates = new ArrayList<>();
 
     //    The second array
@@ -35,18 +35,18 @@ public class kernal3X3_MA_VS_MA {
     //private ArrayList<Integer> AlreadyFull = new ArrayList<>();
 
     //The fifth array
-    private static ArrayList<Integer> order = new ArrayList<>();
+    public static ArrayList<Integer> order = new ArrayList<>();
 
     //To determine player NO.1 or NO.2
     //default: 0 for human (player 1)
-    private static int player;
+    public static int player = 0;
     //points of both player
     //default: Player1 is human
     private static int scoreOfPlayer1 = 0;
     //default: Player2 is computer
     private static int scoreOfPlayer2 = 0;
 
-    public void updateArrays(int index) {
+    public static void updateArrays(int index) {
         switch (index) {
             case 0: {
                 vectors2D[4][1] = 1;
@@ -124,7 +124,7 @@ public class kernal3X3_MA_VS_MA {
 
     }
 
-    public boolean testFour(int x, int y, int player) {
+    public static boolean testFour(int x, int y, int player) {
         boolean isFour = false;
         //testleft
         if (x % 2 != 0 && y != 0) {
@@ -223,8 +223,10 @@ public class kernal3X3_MA_VS_MA {
             } else {
                 updateArrays(index);
                 order.add(index);
+                MainFrame_3X3.getGUIedges().get(index).setFree(false);
                 MainFrame_3X3.getGUIedges().get(index).setColor(Color.RED);
                 MainFrame_3X3.getGUIedges().get(index).setVisible(true);
+                MainFrame_3X3.getGUIedges().get(index).repaint();
                 break;
             }
         }
@@ -245,8 +247,10 @@ public class kernal3X3_MA_VS_MA {
             } else {
                 updateArrays(index);
                 order.add(index);
+                MainFrame_3X3.getGUIedges().get(index).setFree(false);
                 MainFrame_3X3.getGUIedges().get(index).setColor(Color.BLUE);
                 MainFrame_3X3.getGUIedges().get(index).setVisible(true);
+                MainFrame_3X3.getGUIedges().get(index).repaint();
                 break;
             }
         }
@@ -349,18 +353,18 @@ public class kernal3X3_MA_VS_MA {
 
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
-        kernal3X3_MA_VS_MA game = new kernal3X3_MA_VS_MA();
+        kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
 
         //Machine VS. Machine: Lock the mouse
-        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
-            MainFrame_3X3.getGUIedges().get(i).setFree(false);
-        }
+//        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
+//            MainFrame_3X3.getGUIedges().get(i).setFree(false);
+//        }
 
         System.out.println("New Game? Please input yes or no");
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
+                    "1 for player and 2 for computer");
             player = in.nextInt();
         } else {
             game.fileread();
@@ -371,22 +375,33 @@ public class kernal3X3_MA_VS_MA {
             if (isfull(order) == true) {
                 break;
             }
-            if (player == 1) {
-                game.computer1Play();
-                TimeUnit.SECONDS.sleep(1);
-            } else {
-                game.computer2Play();
-                TimeUnit.SECONDS.sleep(1);
-            }
+//          Machine VS. Machine Mode
+
+//            if (player == 1) {
+//                game.computer1Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            } else {
+//                game.computer2Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+
+            //Human VS. Machine Mode: 1 for human and 2 for computer
+//            if(player == 1){
+//
+//            }else{
+//                game.computer2Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+
             game.show(vectors2D);
             System.out.println("\n");
             if (isfull(order) == true) {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 is:");
+        System.out.println("Score of PLayer1 (human player) is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
+        System.out.println("Score of Player2 (computer) is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +
@@ -408,21 +423,21 @@ public class kernal3X3_MA_VS_MA {
 
     }
 
-    public static void MA_VS_MA() throws Exception{
+    public static void HU_VS_HU() throws Exception{
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
-        kernal3X3_MA_VS_MA game = new kernal3X3_MA_VS_MA();
+        kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
 
         //Machine VS. Machine: Lock the mouse
-        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
-            MainFrame_3X3.getGUIedges().get(i).setFree(false);
-        }
+//        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
+//            MainFrame_3X3.getGUIedges().get(i).setFree(false);
+//        }
 
         System.out.println("New Game? Please input yes or no");
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
+                    "1 for player and 2 for computer");
             player = in.nextInt();
         } else {
             game.fileread();
@@ -433,22 +448,33 @@ public class kernal3X3_MA_VS_MA {
             if (isfull(order) == true) {
                 break;
             }
-            if (player == 1) {
-                game.computer1Play();
-                TimeUnit.SECONDS.sleep(1);
-            } else {
-                game.computer2Play();
-                TimeUnit.SECONDS.sleep(1);
-            }
+//          Machine VS. Machine Mode
+
+//            if (player == 1) {
+//                game.computer1Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            } else {
+//                game.computer2Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+
+            //Human VS. Machine Mode: 1 for human and 2 for computer
+//            if(player == 1){
+//
+//            }else{
+//                game.computer2Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+
             game.show(vectors2D);
             System.out.println("\n");
             if (isfull(order) == true) {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 is:");
+        System.out.println("Score of PLayer1 (human player) is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
+        System.out.println("Score of Player2 (computer) is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +

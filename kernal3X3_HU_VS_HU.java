@@ -10,18 +10,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class kernal3X3_HU_VS_HU {
-    //    private List<Edge> edges = new ArrayList<>();
-    //    private List<Dot> dots = new ArrayList<>();
-//    private ArrayList<Edge> edges = new ArrayList<>();
-//    private ArrayList<Dot> dots = new ArrayList<>();
-    private Color currentColor = Color.RED;
-    //      sthe coordinrray
-    //      private Arate of current edge in array NO.2
     public static int currX = 0;
     public static int currY = 0;
-    //    The first arayList<String> coordinates = new ArrayList<>();
-
-    //    The second array
     private static int[][] vectors2D = {
             {0, -1, 0, -1, 0},
             {-1, 0, -1, 0, -1},
@@ -29,22 +19,8 @@ public class kernal3X3_HU_VS_HU {
             {-1, 0, -1, 0, -1},
             {0, -1, 0, -1, 0}
     };
-
-    //The third array
-    private int[] vectors1D = new int[12];
-
-    //The forth array
-    //private ArrayList<Integer> AlreadyFull = new ArrayList<>();
-
-    //The fifth array
     public static ArrayList<Integer> order = new ArrayList<>();
-
-    //To determine player NO.1 or NO.2
-    //default: 0 for human (player 1)
-    //points of both player
-    //default: Player1 is human
     private static int scoreOfPlayer1 = 0;
-    //default: Player2 is computer
     private static int scoreOfPlayer2 = 0;
 
     public static void updateArrays(int index) {
@@ -274,21 +250,15 @@ public class kernal3X3_HU_VS_HU {
         }
     }
 
-    //网上找的代码
     public void fileread() throws Exception {
-        File file = new File("C:\\Users\\74768\\Desktop\\save.txt");
-        //定义一个file对象，用来初始化FileReader
+        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        File file = new File(filepath);
         FileReader reader = new FileReader(file);
-        //定义一个fileReader对象，用来初始化BufferedReader
         BufferedReader bReader = new BufferedReader(reader);
-        //new一个BufferedReader对象，将文件内容读取到缓存
         StringBuilder buffer = new StringBuilder();
-        //定义一个字符串缓存，将字符串存放缓存中
         String s = "";
         while ((s = bReader.readLine()) != null) {
-            //逐行读取文件内容，不读取换行符和末尾的空格
             buffer.append(s + "\n");
-            //将读取的字符串添加换行符后累加存放在缓存中
         }
         bReader.close();
         String str = buffer.toString();
@@ -303,8 +273,6 @@ public class kernal3X3_HU_VS_HU {
     }
 
     public void SavedPlay() {
-        //因为莫名的会出现读档之后player1与player2的反过来，所以暂且在这里加上一个修正，在读档开始时
-        //就切换player一次
 //        if(player == 1){
 //            player++;
 //        }else{
@@ -313,11 +281,7 @@ public class kernal3X3_HU_VS_HU {
         for (int i = 0; i < order.size(); i++) {
             updateArrays(order.get(i));
             if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
-//                if(player == 1){
-//                    scoreOfPlayer1++;
-//                }else{
-//                    scoreOfPlayer2++;
-//                }
+
             } else {
                 if (MainFrame_3X3.getPlayer() == 1) {
                     MainFrame_3X3.setPlayer(2);
@@ -339,7 +303,8 @@ public class kernal3X3_HU_VS_HU {
                 OUT = OUT + "-1 -1 ";
             }
         }
-        File file = new File("C:\\Users\\74768\\Desktop\\save.txt");
+        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        File file = new File(filepath);
         file.createNewFile();
         BufferedWriter output = new BufferedWriter(new FileWriter(file));
         output.write(OUT);
@@ -355,11 +320,6 @@ public class kernal3X3_HU_VS_HU {
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
         kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
-
-        //Machine VS. Machine: Lock the mouse
-//        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
-//            MainFrame_3X3.getGUIedges().get(i).setFree(false);
-//        }
 
         System.out.println("New Game? Please input yes or no");
         String newgame = in.nextLine();
@@ -377,23 +337,6 @@ public class kernal3X3_HU_VS_HU {
             if (isfull(order) == true) {
                 break;
             }
-//          Machine VS. Machine Mode
-
-//            if (player == 1) {
-//                game.computer1Play();
-//                TimeUnit.SECONDS.sleep(1);
-//            } else {
-//                game.computer2Play();
-//                TimeUnit.SECONDS.sleep(1);
-//            }
-
-            //Human VS. Machine Mode: 1 for human and 2 for computer
-//            if(player == 1){
-//
-//            }else{
-//                game.computer2Play();
-//                TimeUnit.SECONDS.sleep(1);
-//            }
 
             game.show(vectors2D);
             System.out.println("\n");
@@ -401,9 +344,9 @@ public class kernal3X3_HU_VS_HU {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 (human player) is:");
+        System.out.println("Score of PLayer1 is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 (computer) is:");
+        System.out.println("Score of Player2 is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +
@@ -430,11 +373,6 @@ public class kernal3X3_HU_VS_HU {
         Scanner in = new Scanner(System.in);
         kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
 
-        //Machine VS. Machine: Lock the mouse
-//        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
-//            MainFrame_3X3.getGUIedges().get(i).setFree(false);
-//        }
-
         System.out.println("New Game? Please input yes or no");
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
@@ -451,31 +389,6 @@ public class kernal3X3_HU_VS_HU {
             if (isfull(order) == true) {
                 break;
             }
-//          Machine VS. Machine Mode
-
-//            if (player == 1) {
-//                game.computer1Play();
-//                TimeUnit.SECONDS.sleep(1);
-//            } else {
-//                game.computer2Play();
-//                TimeUnit.SECONDS.sleep(1);
-//            }
-
-            //Human VS. Machine Mode: 1 for human and 2 for computer
-//            if(player == 1){
-//
-//            }else{
-//                game.computer2Play();
-//                TimeUnit.SECONDS.sleep(1);
-//            }
-//            if(player == 1){
-//                System.out.println("Player1 playing");
-//                TimeUnit.SECONDS.sleep(1);
-//            }else{
-//                System.out.println("Player2 playing");
-//                TimeUnit.SECONDS.sleep(1);
-//            }
-
             TimeUnit.SECONDS.sleep(1);
 
             game.show(vectors2D);
@@ -484,7 +397,7 @@ public class kernal3X3_HU_VS_HU {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 (human player) is:");
+        System.out.println("Score of PLayer1 (human player 1) is:");
         System.out.println(scoreOfPlayer1 + "\n");
         System.out.println("Score of Player2 (computer) is:");
         System.out.println(scoreOfPlayer2 + "\n");

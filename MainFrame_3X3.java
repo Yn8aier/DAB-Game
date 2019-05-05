@@ -5,7 +5,6 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class MainFrame_3X3 extends JFrame {
 
@@ -35,7 +34,6 @@ public class MainFrame_3X3 extends JFrame {
 
     private static ArrayList<EdgeComponent> GUIedges = new ArrayList<>();
     private static ArrayList<DotComponent> GUIdots = new ArrayList<>();
-    public static int gamemode;
     private Color currentColor;
 
     public static int getPlayer() {
@@ -47,6 +45,7 @@ public class MainFrame_3X3 extends JFrame {
     }
 
     private static int player = -1;
+
 
     public MainFrame_3X3() {
         super();
@@ -70,23 +69,24 @@ public class MainFrame_3X3 extends JFrame {
         setLayout(null);
 
         //row1
-        GUIedges.add(new EdgeComponent(50, 50, 220, 20));
-        GUIedges.add(new EdgeComponent(250, 50, 220, 20));
+        GUIedges.add(new EdgeComponent(50, 450, 220, 20));
+        GUIedges.add(new EdgeComponent(250, 450, 220, 20));
         //row2
         GUIedges.add(new EdgeComponent(50, 250, 220, 20));
         GUIedges.add(new EdgeComponent(250, 250, 220, 20));
         //row3
-        GUIedges.add(new EdgeComponent(50, 450, 220, 20));
-        GUIedges.add(new EdgeComponent(250, 450, 220, 20));
+        GUIedges.add(new EdgeComponent(50, 50, 220, 20));
+        GUIedges.add(new EdgeComponent(250, 50, 220, 20));
         //column1
-        GUIedges.add(new EdgeComponent(50, 50, 20, 220));
         GUIedges.add(new EdgeComponent(50, 250, 20, 220));
+        GUIedges.add(new EdgeComponent(50, 50, 20, 220));
         //column2
-        GUIedges.add(new EdgeComponent(250, 50, 20, 220));
         GUIedges.add(new EdgeComponent(250, 250, 20, 220));
+        GUIedges.add(new EdgeComponent(250, 50, 20, 220));
         //column3
-        GUIedges.add(new EdgeComponent(450, 50, 20, 220));
         GUIedges.add(new EdgeComponent(450, 250, 20, 220));
+        GUIedges.add(new EdgeComponent(450, 50, 20, 220));
+
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -196,15 +196,6 @@ public class MainFrame_3X3 extends JFrame {
                 }
 
             }
-//            edges.stream().filter(EdgeComponent::isFree).forEach((e) -> {
-//                if (e == component) {
-//                    e.setColor(currentColor);
-//                    e.setVisible(true);
-//                } else {
-//                    e.setVisible(false);
-//                }
-//            });
         }
-
     }
 }

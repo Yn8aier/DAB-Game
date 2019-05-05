@@ -8,18 +8,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class kernal3X3_MA_VS_MA {
-    //    private List<Edge> edges = new ArrayList<>();
-    //    private List<Dot> dots = new ArrayList<>();
-//    private ArrayList<Edge> edges = new ArrayList<>();
-//    private ArrayList<Dot> dots = new ArrayList<>();
     private Color currentColor = Color.RED;
-    //      sthe coordinrray
-    //      private Arate of current edge in array NO.2
     private static int currX = 0;
     private static int currY = 0;
-    //    The first arayList<String> coordinates = new ArrayList<>();
-
-    //    The second array
     private static int[][] vectors2D = {
             {0, -1, 0, -1, 0},
             {-1, 0, -1, 0, -1},
@@ -27,23 +18,8 @@ public class kernal3X3_MA_VS_MA {
             {-1, 0, -1, 0, -1},
             {0, -1, 0, -1, 0}
     };
-
-    //The third array
-    private int[] vectors1D = new int[12];
-
-    //The forth array
-    //private ArrayList<Integer> AlreadyFull = new ArrayList<>();
-
-    //The fifth array
     private static ArrayList<Integer> order = new ArrayList<>();
-
-    //To determine player NO.1 or NO.2
-    //default: 0 for human (player 1)
-    private static int player;
-    //points of both player
-    //default: Player1 is human
     private static int scoreOfPlayer1 = 0;
-    //default: Player2 is computer
     private static int scoreOfPlayer2 = 0;
 
     public void updateArrays(int index) {
@@ -228,10 +204,10 @@ public class kernal3X3_MA_VS_MA {
                 break;
             }
         }
-        if (testFour(currX, currY, player) == true) {
+        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
         } else {
-            player++;
+            MainFrame_3X3.setPlayer(2);
         }
 
     }
@@ -250,10 +226,10 @@ public class kernal3X3_MA_VS_MA {
                 break;
             }
         }
-        if (testFour(currX, currY, player) == true) {
+        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
         } else {
-            player--;
+            MainFrame_3X3.setPlayer(1);
         }
 
     }
@@ -269,26 +245,20 @@ public class kernal3X3_MA_VS_MA {
         }
     }
 
-    //网上找的代码
     public void fileread() throws Exception {
-        File file = new File("C:\\Users\\74768\\Desktop\\save.txt");
-        //定义一个file对象，用来初始化FileReader
+        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        File file = new File(filepath);
         FileReader reader = new FileReader(file);
-        //定义一个fileReader对象，用来初始化BufferedReader
         BufferedReader bReader = new BufferedReader(reader);
-        //new一个BufferedReader对象，将文件内容读取到缓存
         StringBuilder buffer = new StringBuilder();
-        //定义一个字符串缓存，将字符串存放缓存中
         String s = "";
         while ((s = bReader.readLine()) != null) {
-            //逐行读取文件内容，不读取换行符和末尾的空格
             buffer.append(s + "\n");
-            //将读取的字符串添加换行符后累加存放在缓存中
         }
         bReader.close();
         String str = buffer.toString();
         String[] SavedOrders = str.split(" ");
-        player = Integer.parseInt(SavedOrders[0]);
+        MainFrame_3X3.setPlayer(Integer.parseInt(SavedOrders[0]));
         for (int i = 1; i < SavedOrders.length; i++) {
             if (SavedOrders[i].equals("-1")) {
                 break;
@@ -297,9 +267,7 @@ public class kernal3X3_MA_VS_MA {
         }
     }
 
-    public void SavedPlay() {
-        //因为莫名的会出现读档之后player1与player2的反过来，所以暂且在这里加上一个修正，在读档开始时
-        //就切换player一次
+    public void SavedPlay() throws Exception{
 //        if(player == 1){
 //            player++;
 //        }else{
@@ -307,17 +275,21 @@ public class kernal3X3_MA_VS_MA {
 //        }
         for (int i = 0; i < order.size(); i++) {
             updateArrays(order.get(i));
-            if (testFour(currX, currY, player) == true) {
-//                if(player == 1){
-//                    scoreOfPlayer1++;
-//                }else{
-//                    scoreOfPlayer2++;
-//                }
+            if(MainFrame_3X3.getPlayer() == 1){
+                currentColor = Color.RED;
+            }else{
+                currentColor = Color.BLUE;
+            }
+            MainFrame_3X3.getGUIedges().get(order.get(i)).setColor(currentColor);
+            MainFrame_3X3.getGUIedges().get(order.get(i)).setVisible(true);
+            TimeUnit.SECONDS.sleep(1);
+            if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
+
             } else {
-                if (player == 1) {
-                    player++;
+                if (MainFrame_3X3.getPlayer() == 1) {
+                    MainFrame_3X3.setPlayer(2);
                 } else {
-                    player--;
+                    MainFrame_3X3.setPlayer(1);
                 }
             }
         }
@@ -327,14 +299,15 @@ public class kernal3X3_MA_VS_MA {
 
     public void fileWrite() throws Exception {
         String OUT = "";
-        OUT = OUT + player + " ";
+        OUT = OUT + MainFrame_3X3.getPlayer() + " ";
         for (int i = 0; i < order.size(); i++) {
             OUT = OUT + order.get(i) + " ";
             if (i == order.size() - 1) {
                 OUT = OUT + "-1 -1 ";
             }
         }
-        File file = new File("C:\\Users\\74768\\Desktop\\save.txt");
+        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        File file = new File(filepath);
         file.createNewFile();
         BufferedWriter output = new BufferedWriter(new FileWriter(file));
         output.write(OUT);
@@ -361,7 +334,8 @@ public class kernal3X3_MA_VS_MA {
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
                     "1 for computer1 and 2 for computer 2");
-            player = in.nextInt();
+            int a = in.nextInt();
+            MainFrame_3X3.setPlayer(a);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -371,7 +345,7 @@ public class kernal3X3_MA_VS_MA {
             if (isfull(order) == true) {
                 break;
             }
-            if (player == 1) {
+            if (MainFrame_3X3.getPlayer() == 1) {
                 game.computer1Play();
                 TimeUnit.SECONDS.sleep(1);
             } else {
@@ -423,7 +397,8 @@ public class kernal3X3_MA_VS_MA {
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
                     "1 for computer1 and 2 for computer 2");
-            player = in.nextInt();
+            int a = in.nextInt();
+            MainFrame_3X3.setPlayer(a);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -433,7 +408,7 @@ public class kernal3X3_MA_VS_MA {
             if (isfull(order) == true) {
                 break;
             }
-            if (player == 1) {
+            if (MainFrame_3X3.getPlayer() == 1) {
                 game.computer1Play();
                 TimeUnit.SECONDS.sleep(1);
             } else {
@@ -446,9 +421,9 @@ public class kernal3X3_MA_VS_MA {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 is:");
+        System.out.println("Score of Computer 1 is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
+        System.out.println("Score of Computer 2 is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +

@@ -22,7 +22,7 @@ public class kernal3X3_MA_VS_MA {
     private static int scoreOfPlayer1 = 0;
     private static int scoreOfPlayer2 = 0;
 
-    public void updateArrays(int index) {
+    public static void updateArrays(int index) {
         switch (index) {
             case 0: {
                 vectors2D[4][1] = 1;
@@ -197,7 +197,7 @@ public class kernal3X3_MA_VS_MA {
             if (isRepeat(index) == true) {
                 continue;
             } else {
-                updateArrays(index);
+                kernal3X3_MA_VS_MA.updateArrays(index);
                 order.add(index);
                 MainFrame_3X3.getGUIedges().get(index).setColor(Color.RED);
                 MainFrame_3X3.getGUIedges().get(index).setVisible(true);
@@ -219,7 +219,7 @@ public class kernal3X3_MA_VS_MA {
             if (isRepeat(index) == true) {
                 continue;
             } else {
-                updateArrays(index);
+                kernal3X3_MA_VS_MA.updateArrays(index);
                 order.add(index);
                 MainFrame_3X3.getGUIedges().get(index).setColor(Color.BLUE);
                 MainFrame_3X3.getGUIedges().get(index).setVisible(true);
@@ -274,7 +274,7 @@ public class kernal3X3_MA_VS_MA {
 //            player--;
 //        }
         for (int i = 0; i < order.size(); i++) {
-            updateArrays(order.get(i));
+            kernal3X3_MA_VS_MA.updateArrays(order.get(i));
             if(MainFrame_3X3.getPlayer() == 1){
                 currentColor = Color.RED;
             }else{
@@ -318,69 +318,7 @@ public class kernal3X3_MA_VS_MA {
     private static MainFrame_3X3 mainframe = new MainFrame_3X3();
 
 
-    public static void main(String[] args) throws Exception {
 
-        mainframe.setVisible(true);
-        Scanner in = new Scanner(System.in);
-        kernal3X3_MA_VS_MA game = new kernal3X3_MA_VS_MA();
-
-        //Machine VS. Machine: Lock the mouse
-        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
-            MainFrame_3X3.getGUIedges().get(i).setFree(false);
-        }
-
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
-        if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
-            int a = in.nextInt();
-            MainFrame_3X3.setPlayer(a);
-        } else {
-            game.fileread();
-            game.SavedPlay();
-            game.show(vectors2D);
-        }
-        for (; ; ) {
-            if (isfull(order) == true) {
-                break;
-            }
-            if (MainFrame_3X3.getPlayer() == 1) {
-                game.computer1Play();
-                TimeUnit.SECONDS.sleep(1);
-            } else {
-                game.computer2Play();
-                TimeUnit.SECONDS.sleep(1);
-            }
-            game.show(vectors2D);
-            System.out.println("\n");
-            if (isfull(order) == true) {
-                break;
-            }
-        }
-        System.out.println("Score of PLayer1 is:");
-        System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
-        System.out.println(scoreOfPlayer2 + "\n");
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Do you want to save this game?\n" +
-                "yes or no");
-        String DoSave = "";
-        for(;;){
-            DoSave = in.nextLine();
-            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
-                break;
-            }
-        }
-        if (DoSave.toLowerCase().equals("no")) {
-        } else {
-            game.fileWrite();
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("Game Saved");
-        }
-        System.out.println("\nGame Over");
-
-    }
 
     public static void MA_VS_MA() throws Exception{
         mainframe.setVisible(true);
@@ -444,3 +382,67 @@ public class kernal3X3_MA_VS_MA {
         System.out.println("\nGame Over");
     }
 }
+
+//    public static void main(String[] args) throws Exception {
+//
+//        mainframe.setVisible(true);
+//        Scanner in = new Scanner(System.in);
+//        kernal3X3_MA_VS_MA game = new kernal3X3_MA_VS_MA();
+//
+//        //Machine VS. Machine: Lock the mouse
+//        for(int i = 0; i < MainFrame_3X3.getGUIedges().size(); i++){
+//            MainFrame_3X3.getGUIedges().get(i).setFree(false);
+//        }
+//
+//        System.out.println("New Game? Please input yes or no");
+//        String newgame = in.nextLine();
+//        if (newgame.toLowerCase().equals("yes")) {
+//            System.out.println("Which one do you want to play first?\n" +
+//                    "1 for computer1 and 2 for computer 2");
+//            int a = in.nextInt();
+//            MainFrame_3X3.setPlayer(a);
+//        } else {
+//            game.fileread();
+//            game.SavedPlay();
+//            game.show(vectors2D);
+//        }
+//        for (; ; ) {
+//            if (isfull(order) == true) {
+//                break;
+//            }
+//            if (MainFrame_3X3.getPlayer() == 1) {
+//                game.computer1Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            } else {
+//                game.computer2Play();
+//                TimeUnit.SECONDS.sleep(1);
+//            }
+//            game.show(vectors2D);
+//            System.out.println("\n");
+//            if (isfull(order) == true) {
+//                break;
+//            }
+//        }
+//        System.out.println("Score of PLayer1 is:");
+//        System.out.println(scoreOfPlayer1 + "\n");
+//        System.out.println("Score of Player2 is:");
+//        System.out.println(scoreOfPlayer2 + "\n");
+//        TimeUnit.SECONDS.sleep(1);
+//        System.out.println("Do you want to save this game?\n" +
+//                "yes or no");
+//        String DoSave = "";
+//        for(;;){
+//            DoSave = in.nextLine();
+//            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
+//                break;
+//            }
+//        }
+//        if (DoSave.toLowerCase().equals("no")) {
+//        } else {
+//            game.fileWrite();
+//            TimeUnit.SECONDS.sleep(1);
+//            System.out.println("Game Saved");
+//        }
+//        System.out.println("\nGame Over");
+//
+//    }

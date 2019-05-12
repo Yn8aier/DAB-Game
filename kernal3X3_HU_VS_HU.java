@@ -1,6 +1,5 @@
 package Project;
 
-import Study.MainFrame;
 
 import java.awt.*;
 import java.io.*;
@@ -198,7 +197,7 @@ public class kernal3X3_HU_VS_HU {
             if (isRepeat(index) == true) {
                 continue;
             } else {
-                updateArrays(index);
+                kernal3X3_HU_VS_HU.updateArrays(index);
                 order.add(index);
                 MainFrame_3X3.getGUIedges().get(index).setFree(false);
                 MainFrame_3X3.getGUIedges().get(index).setColor(Color.RED);
@@ -222,7 +221,7 @@ public class kernal3X3_HU_VS_HU {
             if (isRepeat(index) == true) {
                 continue;
             } else {
-                updateArrays(index);
+                kernal3X3_HU_VS_HU.updateArrays(index);
                 order.add(index);
                 MainFrame_3X3.getGUIedges().get(index).setFree(false);
                 MainFrame_3X3.getGUIedges().get(index).setColor(Color.BLUE);
@@ -279,7 +278,7 @@ public class kernal3X3_HU_VS_HU {
 //            player--;
 //        }
         for (int i = 0; i < order.size(); i++) {
-            updateArrays(order.get(i));
+            kernal3X3_HU_VS_HU.updateArrays(order.get(i));
             if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
 
             } else {
@@ -315,58 +314,7 @@ public class kernal3X3_HU_VS_HU {
     private static MainFrame_3X3 mainframe = new MainFrame_3X3();
 
 
-    public static void main(String[] args) throws Exception {
 
-        mainframe.setVisible(true);
-        Scanner in = new Scanner(System.in);
-        kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
-
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
-        if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for player and 2 for computer");
-            int anumber = in.nextInt();
-            MainFrame_3X3.setPlayer(anumber);
-        } else {
-            game.fileread();
-            game.SavedPlay();
-            game.show(vectors2D);
-        }
-        for (; ; ) {
-            if (isfull(order) == true) {
-                break;
-            }
-
-            game.show(vectors2D);
-            System.out.println("\n");
-            if (isfull(order) == true) {
-                break;
-            }
-        }
-        System.out.println("Score of PLayer1 is:");
-        System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
-        System.out.println(scoreOfPlayer2 + "\n");
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Do you want to save this game?\n" +
-                "yes or no");
-        String DoSave = "";
-        for(;;){
-            DoSave = in.nextLine();
-            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
-                break;
-            }
-        }
-        if (DoSave.toLowerCase().equals("no")) {
-        } else {
-            game.fileWrite();
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("Game Saved");
-        }
-        System.out.println("\nGame Over");
-
-    }
 
     public static void HU_VS_HU() throws Exception{
         mainframe.setVisible(true);
@@ -377,7 +325,7 @@ public class kernal3X3_HU_VS_HU {
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
-                    "1 for player and 2 for computer");
+                    "1 for player 1 and 2 for player 2");
             int anumber = in.nextInt();
             MainFrame_3X3.setPlayer(anumber);
         } else {
@@ -399,7 +347,7 @@ public class kernal3X3_HU_VS_HU {
         }
         System.out.println("Score of PLayer1 (human player 1) is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 (computer) is:");
+        System.out.println("Score of Player2 (human player 2) is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +
@@ -420,3 +368,57 @@ public class kernal3X3_HU_VS_HU {
         System.out.println("\nGame Over");
     }
 }
+
+
+//    public static void main(String[] args) throws Exception {
+//
+//        mainframe.setVisible(true);
+//        Scanner in = new Scanner(System.in);
+//        kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
+//
+//        System.out.println("New Game? Please input yes or no");
+//        String newgame = in.nextLine();
+//        if (newgame.toLowerCase().equals("yes")) {
+//            System.out.println("Which one do you want to play first?\n" +
+//                    "1 for player and 2 for computer");
+//            int anumber = in.nextInt();
+//            MainFrame_3X3.setPlayer(anumber);
+//        } else {
+//            game.fileread();
+//            game.SavedPlay();
+//            game.show(vectors2D);
+//        }
+//        for (; ; ) {
+//            if (isfull(order) == true) {
+//                break;
+//            }
+//
+//            game.show(vectors2D);
+//            System.out.println("\n");
+//            if (isfull(order) == true) {
+//                break;
+//            }
+//        }
+//        System.out.println("Score of PLayer1 is:");
+//        System.out.println(scoreOfPlayer1 + "\n");
+//        System.out.println("Score of Player2 is:");
+//        System.out.println(scoreOfPlayer2 + "\n");
+//        TimeUnit.SECONDS.sleep(1);
+//        System.out.println("Do you want to save this game?\n" +
+//                "yes or no");
+//        String DoSave = "";
+//        for(;;){
+//            DoSave = in.nextLine();
+//            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
+//                break;
+//            }
+//        }
+//        if (DoSave.toLowerCase().equals("no")) {
+//        } else {
+//            game.fileWrite();
+//            TimeUnit.SECONDS.sleep(1);
+//            System.out.println("Game Saved");
+//        }
+//        System.out.println("\nGame Over");
+//
+//    }

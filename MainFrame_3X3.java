@@ -113,11 +113,7 @@ public class MainFrame_3X3 extends JFrame {
             if (component instanceof EdgeComponent) {
                 EdgeComponent edgeComponent = (EdgeComponent) component;
                 if (edgeComponent.isFree()) {
-                    if(player == 1){
-                        currentColor = Color.RED;
-                    }else{
-                        currentColor = Color.BLUE;
-                    }
+
                     if(GameStart.gamemode == 1){
                         currentColor = Color.RED;
                         if(player == 1){
@@ -147,12 +143,9 @@ public class MainFrame_3X3 extends JFrame {
                             if(GUIedges.get(i).equals(edgeComponent)){
                                 kernal3X3_HU_VS_HU.updateArrays(i);
                                 kernal3X3_HU_VS_HU.order.add(i);
-                                if (kernal3X3_HU_VS_HU.testFour(kernal3X3_HU_VS_HU.currX, kernal3X3_HU_VS_HU.currY, player) == true) {
-
-                                } else {
+                                if(kernal3X3_HU_VS_HU.testFour(kernal3X3_HU_VS_HU.currX,kernal3X3_HU_VS_HU.currY,player) == false){
                                     if(player == 1){
                                         player++;
-
                                     }else{
                                         player--;
                                     }
@@ -164,10 +157,6 @@ public class MainFrame_3X3 extends JFrame {
                     edgeComponent.setFree(false);
                     edgeComponent.setVisible(true);
                     edgeComponent.repaint();
-
-
-
-
 
                 }
             }

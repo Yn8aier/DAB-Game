@@ -315,6 +315,7 @@ public class kernal3X3_HU_VS_MA {
 
 
     public static void HU_vs_MA() throws Exception{
+
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
         kernal3X3_HU_VS_MA game = new kernal3X3_HU_VS_MA();

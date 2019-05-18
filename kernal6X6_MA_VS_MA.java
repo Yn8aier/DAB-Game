@@ -576,13 +576,9 @@ public class kernal6X6_MA_VS_MA {
             MainFrame_6X6.getGUIedges().get(i).setFree(false);
         }
 
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
+        String newgame = GamemodeSelect.newGame;
         if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
-            int a = in.nextInt();
-            MainFrame_6X6.setPlayer(a);
+            MainFrame_6X6.setPlayer(GamemodeSelect.playerFirst);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -639,13 +635,9 @@ public class kernal6X6_MA_VS_MA {
             MainFrame_6X6.getGUIedges().get(i).setFree(false);
         }
 
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
+        String newgame = GamemodeSelect.newGame;
         if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
-            int a = in.nextInt();
-            MainFrame_6X6.setPlayer(a);
+            MainFrame_6X6.setPlayer(GamemodeSelect.playerFirst);
         } else {
             game.fileread();
             game.SavedPlay();

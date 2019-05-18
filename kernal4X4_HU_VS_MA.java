@@ -416,13 +416,9 @@ public class kernal4X4_HU_VS_MA {
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
         kernal4X4_HU_VS_MA game = new kernal4X4_HU_VS_MA();
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
+        String newgame = GamemodeSelect.newGame;
         if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for player and 2 for computer");
-            int anumber = in.nextInt();
-            MainFrame_4X4.setPlayer(anumber);
+            MainFrame_4X4.setPlayer(GamemodeSelect.playerFirst);
         } else {
             game.fileread();
             game.SavedPlay();

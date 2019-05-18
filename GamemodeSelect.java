@@ -20,6 +20,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class GamemodeSelect {
 
@@ -34,10 +35,12 @@ public class GamemodeSelect {
 	private boolean five = false;
 	private boolean six = false;
 	private boolean seven = false;
-	private boolean god = false;
 	public static int gamemode = -1;
 	private File directory = new File("");
-
+	public static String newGame = "";
+	public static int playerFirst = -1;
+	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+	
 
 	/**
 	 * Launch the application.
@@ -95,7 +98,7 @@ public class GamemodeSelect {
 
 		JLabel lblYouCanSelect = new JLabel("Select the gamemode!\r\n");
 		lblYouCanSelect.setFont(new Font("Ink Free", Font.BOLD, 35));
-		lblYouCanSelect.setBounds(48, 205, 431, 60);
+		lblYouCanSelect.setBounds(48, 195, 431, 60);
 		panel.add(lblYouCanSelect);
 
 		JRadioButton rdbtnIWantTo = new JRadioButton("I want to play \r\nwith my friend");
@@ -113,7 +116,7 @@ public class GamemodeSelect {
 		buttonGroup.add(rdbtnIWantTo);
 		rdbtnIWantTo.setFont(new Font("Ink Free", Font.BOLD, 30));
 		rdbtnIWantTo.setBackground(Color.WHITE);
-		rdbtnIWantTo.setBounds(17, 270, 543, 60);
+		rdbtnIWantTo.setBounds(17, 255, 543, 60);
 		panel.add(rdbtnIWantTo);
 
 		JRadioButton rdbtnIWantTo_1 = new JRadioButton("I want to play with my lovely PC");
@@ -131,7 +134,7 @@ public class GamemodeSelect {
 		buttonGroup.add(rdbtnIWantTo_1);
 		rdbtnIWantTo_1.setFont(new Font("Ink Free", Font.BOLD, 30));
 		rdbtnIWantTo_1.setBackground(Color.WHITE);
-		rdbtnIWantTo_1.setBounds(17, 315, 543, 60);
+		rdbtnIWantTo_1.setBounds(17, 300, 543, 60);
 		panel.add(rdbtnIWantTo_1);
 
 		JRadioButton rdbtnIWantTo_2 = new JRadioButton("I want to see my PC Self-High");
@@ -149,7 +152,7 @@ public class GamemodeSelect {
 		buttonGroup.add(rdbtnIWantTo_2);
 		rdbtnIWantTo_2.setFont(new Font("Ink Free", Font.BOLD, 30));
 		rdbtnIWantTo_2.setBackground(Color.WHITE);
-		rdbtnIWantTo_2.setBounds(17, 359, 511, 60);
+		rdbtnIWantTo_2.setBounds(17, 344, 511, 60);
 		panel.add(rdbtnIWantTo_2);
 
 		JRadioButton rdbtnX = new JRadioButton("3 X 3");
@@ -206,25 +209,6 @@ public class GamemodeSelect {
 		rdbtnX_2.setBounds(573, 359, 231, 37);
 		panel.add(rdbtnX_2);
 
-		JRadioButton rdbtnIAmThe = new JRadioButton("I am the God!");
-		rdbtnIAmThe.setOpaque(false);
-		rdbtnIAmThe.setContentAreaFilled(false);
-		rdbtnIAmThe.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == 1) {
-					god = true;
-				}else {
-					god = false;
-				}
-			}
-		});
-		rdbtnIAmThe.setFont(new Font("Ink Free", Font.BOLD, 36));
-		rdbtnIAmThe.setEnabled(false);
-		buttonGroup_1.add(rdbtnIAmThe);
-		rdbtnIAmThe.setBackground(Color.WHITE);
-		rdbtnIAmThe.setBounds(573, 393, 293, 37);
-		panel.add(rdbtnIAmThe);
-
 		JRadioButton rdbtnX_3 = new JRadioButton("6 X 6\r\n");
 		buttonGroup_1.add(rdbtnX_3);
 		rdbtnX_3.setOpaque(false);
@@ -275,8 +259,10 @@ public class GamemodeSelect {
 			void run(){
 				if(huhu == false && huma == false && mama == false) {
 					JOptionPane.showMessageDialog(null, "You have not choose the game mode", "Oops!", JOptionPane.ERROR_MESSAGE);
-				}else if(three == false && four == false && five == false && god == false && six == false && seven == false) {
+				}else if(three == false && four == false && five == false && six == false && seven == false) {
 					JOptionPane.showMessageDialog(null, "You have not choose the gameboard size", "Oops!", JOptionPane.ERROR_MESSAGE);
+				}else if(playerFirst != 1 && playerFirst != 2) {
+					JOptionPane.showMessageDialog(null, "You have not choose if you play first", "Oops!", JOptionPane.ERROR_MESSAGE);
 				}else {
 
 					if(huhu == true && three == true) {
@@ -445,11 +431,52 @@ public class GamemodeSelect {
 
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == btnGameStart) {
+					newGame = "yes";
 					new Thread(()->run()).start();
 				}
 			}
 		});
-		btnGameStart.setBounds(164, 469, 161, 45);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("First");
+		rdbtnNewRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == 1) {
+					playerFirst = 1;
+				}else {
+					playerFirst = 2;
+				}
+			}
+		});
+		rdbtnNewRadioButton.setOpaque(false);
+		rdbtnNewRadioButton.setContentAreaFilled(false);
+		rdbtnNewRadioButton.setFont(new Font("Ink Free", Font.BOLD, 32));
+		buttonGroup_2.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setBounds(432, 399, 129, 37);
+		
+		panel.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnPlayer = new JRadioButton("Next");
+		rdbtnPlayer.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == 1) {
+					playerFirst = 2;
+				}else {
+					playerFirst = 1;
+				}
+			}
+		});
+		rdbtnPlayer.setOpaque(false);
+		rdbtnPlayer.setContentAreaFilled(false);
+		rdbtnPlayer.setFont(new Font("Ink Free", Font.BOLD, 32));
+		buttonGroup_2.add(rdbtnPlayer);
+		rdbtnPlayer.setBounds(573, 399, 231, 37);
+		panel.add(rdbtnPlayer);
+		
+		JLabel lblMoveFirstOr = new JLabel("Move First or Next");
+		lblMoveFirstOr.setFont(new Font("Ink Free", Font.BOLD, 32));
+		lblMoveFirstOr.setBounds(77, 388, 431, 60);
+		panel.add(lblMoveFirstOr);
+		btnGameStart.setBounds(109, 469, 216, 45);
 		panel.add(btnGameStart);
 
 		JButton btnBack = new JButton("Back");

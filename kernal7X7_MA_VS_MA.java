@@ -717,13 +717,9 @@ public class kernal7X7_MA_VS_MA {
             MainFrame_7X7.getGUIedges().get(i).setFree(false);
         }
 
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
+        String newgame = GamemodeSelect.newGame;
         if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for computer1 and 2 for computer 2");
-            int a = in.nextInt();
-            MainFrame_7X7.setPlayer(a);
+            MainFrame_7X7.setPlayer(GamemodeSelect.playerFirst);
         } else {
             game.fileread();
             game.SavedPlay();

@@ -6,21 +6,42 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 public class Register {
 
 	private JFrame frmRegister;
 	private JTextField textField;
 	private JTextField textField_1;
+	private File directory = new File("");
+	private String ID = "";
+	private String PW = "";
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Register window = new Register();
+					window.frmRegister.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public static void openRegister() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -47,52 +68,91 @@ public class Register {
 		frmRegister = new JFrame();
 		frmRegister.setTitle("Register");
 		frmRegister.getContentPane().setBackground(Color.WHITE);
-		frmRegister.setBounds(100, 100, 700, 517);
+		frmRegister.setBounds(100, 100, 756, 553);
 		frmRegister.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegister.getContentPane().setLayout(null);
 		
-		JTextPane txtpnId = new JTextPane();
-		txtpnId.setText("Your ID:");
-		txtpnId.setBounds(55, 205, 135, 41);
-		frmRegister.getContentPane().add(txtpnId);
-		
-		textField = new JTextField();
-		textField.setBounds(194, 211, 309, 35);
-		frmRegister.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JTextPane txtpnYourPw = new JTextPane();
-		txtpnYourPw.setText("Your PW:");
-		txtpnYourPw.setBounds(55, 267, 135, 41);
-		frmRegister.getContentPane().add(txtpnYourPw);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(194, 273, 309, 35);
-		frmRegister.getContentPane().add(textField_1);
-		
-		JButton btnOkIFinish = new JButton("OK! I finish!");
-		btnOkIFinish.setFont(new Font("ËÎÌå", Font.PLAIN, 18));
-		btnOkIFinish.setBounds(118, 343, 153, 37);
-		frmRegister.getContentPane().add(btnOkIFinish);
-		
-		JButton btnExit = new JButton("EXIT");
-		btnExit.setFont(new Font("ËÎÌå", Font.PLAIN, 18));
-		btnExit.setBounds(375, 341, 153, 37);
-		frmRegister.getContentPane().add(btnExit);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 674, 446);
+		panel.setBounds(0, 0, 730, 482);
 		frmRegister.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblHiOYou = new JLabel("Hi~ o(*\uFFE3\u25BD\uFFE3*)\u30D6, you may not have an account ");
-		lblHiOYou.setBounds(60, 121, 564, 29);
+		textField = new JTextField();
+		textField.setFont(new Font("å®‹ä½“", Font.PLAIN, 32));
+		textField.setBounds(310, 235, 309, 35);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setFont(new Font("å®‹ä½“", Font.PLAIN, 32));
+		textField_1.setBounds(310, 308, 309, 35);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JButton btnOkIFinish = new JButton("OK! I finish!");
+		btnOkIFinish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ID = textField.getText().trim();
+				PW = textField_1.getText().trim();
+			}
+		});
+		btnOkIFinish.setBackground(Color.LIGHT_GRAY);
+		btnOkIFinish.setForeground(Color.BLACK);
+		btnOkIFinish.setBounds(125, 381, 177, 46);
+		panel.add(btnOkIFinish);
+		btnOkIFinish.setFont(new Font("Dialog", Font.PLAIN, 26));
+		
+		JButton btnExit = new JButton("EXIT");
+		btnExit.setBackground(Color.LIGHT_GRAY);
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == btnExit) {
+					System.exit(0);
+				}
+			}
+		});
+		btnExit.setBounds(423, 381, 158, 46);
+		panel.add(btnExit);
+		btnExit.setFont(new Font("Dialog", Font.PLAIN, 32));
+		
+		JLabel lblHiOYou = new JLabel("Hi player , you may not have an account ");
+		lblHiOYou.setFont(new Font("Ink Free", Font.BOLD, 34));
+		lblHiOYou.setBounds(43, 72, 752, 87);
 		panel.add(lblHiOYou);
 		
-		JLabel lblFollowTheInstructions = new JLabel("Follow the instructions to creat one.");
-		lblFollowTheInstructions.setBounds(102, 160, 551, 29);
-		panel.add(lblFollowTheInstructions);
+		JLabel lblFollowSomeSteps = new JLabel("Follow some steps to create one!");
+		lblFollowSomeSteps.setFont(new Font("Ink Free", Font.BOLD, 34));
+		lblFollowSomeSteps.setBounds(75, 140, 752, 87);
+		panel.add(lblFollowSomeSteps);
+		
+		JTextPane txtpnId = new JTextPane();
+		txtpnId.setOpaque(false);
+		txtpnId.setBounds(114, 226, 190, 41);
+		panel.add(txtpnId);
+		txtpnId.setFont(new Font("Ink Free", Font.BOLD, 34));
+
+		txtpnId.setText("Your ID:");
+		
+		JTextPane txtpnYourPw = new JTextPane();
+		txtpnYourPw.setOpaque(false);
+		txtpnYourPw.setBounds(115, 302, 177, 41);
+		panel.add(txtpnYourPw);
+		txtpnYourPw.setFont(new Font("Ink Free", Font.BOLD, 34));
+		txtpnYourPw.setText("Password:");
+		
+		String path = "";
+		try {
+			path = directory.getCanonicalPath();
+			path = path.replaceAll("\\\\","\\\\\\\\");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		JLabel Background = new JLabel(" ");
+		Background.setIcon(new ImageIcon(path + "\\BA.jpg"));
+		Background.setBounds(-51, 0, 781, 482);
+		panel.add(Background);
 	}
 }

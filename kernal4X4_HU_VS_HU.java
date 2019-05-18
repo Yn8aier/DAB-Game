@@ -1,4 +1,5 @@
-package Project;
+ package Project;
+
 
 
 import java.awt.*;
@@ -8,15 +9,17 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class kernal3X3_HU_VS_HU {
+public class kernal4X4_HU_VS_HU {
     public static int currX = 0;
     public static int currY = 0;
     private static int[][] vectors2D = {
-            {0, -1, 0, -1, 0},
-            {-1, 0, -1, 0, -1},
-            {0, -1, 0, -1, 0},
-            {-1, 0, -1, 0, -1},
-            {0, -1, 0, -1, 0}
+            {0, -1, 0, -1, 0,-1,0},
+            {-1, 0, -1, 0, -1,0,-1},
+            {0, -1, 0, -1, 0,-1,0},
+            {-1, 0, -1, 0, -1,0,-1},
+            {0, -1, 0, -1, 0,-1,0},
+            {-1,0,-1,0,-1,0,-1},
+            {0,-1,0,-1,0,-1,0}
     };
     public static ArrayList<Integer> order = new ArrayList<>();
     private static int scoreOfPlayer1 = 0;
@@ -25,77 +28,126 @@ public class kernal3X3_HU_VS_HU {
     public static void updateArrays(int index) {
         switch (index) {
             case 0: {
+                vectors2D[6][1] = 1;
+                currX = 6;
+                currY = 1;
+                break;
+            }
+            case 1: {
+                vectors2D[6][3] = 1;
+                currX = 6;
+                currY = 3;
+                break;
+            }
+            case 2: {
+                vectors2D[6][5] = 1;
+                currX = 6;
+                currY = 5;
+                break;
+            }
+            case 3: {
                 vectors2D[4][1] = 1;
                 currX = 4;
                 currY = 1;
                 break;
             }
-            case 1: {
+            case 4: {
                 vectors2D[4][3] = 1;
                 currX = 4;
                 currY = 3;
                 break;
             }
-            case 2: {
+            case 5: {
+                vectors2D[4][5] = 1;
+                currX = 4;
+                currY = 5;
+                break;
+            }
+            case 6: {
                 vectors2D[2][1] = 1;
                 currX = 2;
                 currY = 1;
                 break;
             }
-            case 3: {
+            case 7: {
                 vectors2D[2][3] = 1;
                 currX = 2;
                 currY = 3;
                 break;
             }
-            case 4: {
+            case 8: {
+                vectors2D[2][5] = 1;
+                currX = 2;
+                currY = 5;
+                break;
+            }
+            case 9: {
                 vectors2D[0][1] = 1;
                 currX = 0;
                 currY = 1;
                 break;
             }
-            case 5: {
+            case 10: {
                 vectors2D[0][3] = 1;
                 currX = 0;
                 currY = 3;
                 break;
             }
-            case 6: {
-                vectors2D[3][0] = 1;
-                currX = 3;
-                currY = 0;
-                break;
-            }
-            case 7: {
-                vectors2D[1][0] = 1;
-                currX = 1;
-                currY = 0;
-                break;
-            }
-            case 8: {
-                vectors2D[3][2] = 1;
-                currX = 3;
-                currY = 2;
-                break;
-            }
-            case 9: {
-                vectors2D[1][2] = 1;
-                currX = 1;
-                currY = 2;
-                break;
-            }
-            case 10: {
-                vectors2D[3][4] = 1;
-                currX = 3;
-                currY = 4;
-                break;
-            }
             case 11: {
-                vectors2D[1][4] = 1;
-                currX = 1;
-                currY = 4;
+                vectors2D[0][5] = 1;
+                currX = 0;
+                currY = 5;
                 break;
             }
+
+            case 12:{vectors2D[1][0] = 1;
+                currX = 1;
+                currY = 0;
+                break;}
+            case 13:{vectors2D[3][0] = 1;
+                currX = 3;
+                currY = 0;
+                break;}
+            case 14:{vectors2D[5][0] = 1;
+                currX = 5;
+                currY = 0;
+                break;}
+            case 15:{vectors2D[1][2] = 1;
+                currX = 1;
+                currY = 2;
+                break;}
+            case 16:{vectors2D[3][2] = 1;
+                currX = 3;
+                currY = 2;
+                break;}
+            case 17:{vectors2D[5][2] = 1;
+                currX = 5;
+                currY = 2;
+                break;}
+            case 18:{vectors2D[1][4] = 1;
+                currX = 1;
+                currY = 4;
+                break;}
+            case 19:{vectors2D[3][4] = 1;
+                currX = 3;
+                currY = 4;
+                break;}
+            case 20:{vectors2D[5][4] = 1;
+                currX = 5;
+                currY = 4;
+                break;}
+            case 21:{vectors2D[1][6] = 1;
+                currX = 1;
+                currY = 6;
+                break;}
+            case 22:{vectors2D[3][6] = 1;
+                currX = 3;
+                currY = 6;
+                break;}
+            case 23:{vectors2D[5][6] = 1;
+                currX = 5;
+                currY = 6;
+                break;}
         }
 
     }
@@ -116,7 +168,7 @@ public class kernal3X3_HU_VS_HU {
             }
         }
         //testright
-        if (x % 2 != 0 && y != 4) {
+        if (x % 2 != 0 && y != 6) {
             if (vectors2D[x][y + 2] == 1) {
                 if (vectors2D[x - 1][y + 1] == 1 && vectors2D[x + 1][y + 1] == 1) {
                     isFour = true;
@@ -142,7 +194,7 @@ public class kernal3X3_HU_VS_HU {
             }
         }
         //testdown
-        if (x % 2 == 0 && x != 4) {
+        if (x % 2 == 0 && x != 6) {
             if (vectors2D[x + 2][y] == 1) {
                 if (vectors2D[x + 1][y - 1] == 1 && vectors2D[x + 1][y + 1] == 1) {
                     isFour = true;
@@ -168,7 +220,7 @@ public class kernal3X3_HU_VS_HU {
 
     public static boolean isfull(ArrayList order) {
         boolean isFull = false;
-        if (order.size() == 12) {
+        if (order.size() == 24) {
             return true;
         }
         return isFull;
@@ -177,7 +229,7 @@ public class kernal3X3_HU_VS_HU {
     public int getRandom() {
         int random = 0;
         Random rand = new Random();
-        random = rand.nextInt(12);
+        random = rand.nextInt(24);
         return random;
     }
 
@@ -188,19 +240,19 @@ public class kernal3X3_HU_VS_HU {
             if (isRepeat(index) == true) {
                 continue;
             } else {
-                kernal3X3_HU_VS_HU.updateArrays(index);
+                kernal4X4_HU_VS_HU.updateArrays(index);
                 order.add(index);
-                MainFrame_3X3.getGUIedges().get(index).setFree(false);
-                MainFrame_3X3.getGUIedges().get(index).setColor(Color.RED);
-                MainFrame_3X3.getGUIedges().get(index).setVisible(true);
-                MainFrame_3X3.getGUIedges().get(index).repaint();
+                MainFrame_4X4.getGUIedges().get(index).setFree(false);
+                MainFrame_4X4.getGUIedges().get(index).setColor(Color.RED);
+                MainFrame_4X4.getGUIedges().get(index).setVisible(true);
+                MainFrame_4X4.getGUIedges().get(index).repaint();
                 break;
             }
         }
-        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
+        if (testFour(currX, currY, MainFrame_4X4.getPlayer()) == true) {
 
         } else {
-            MainFrame_3X3.setPlayer(2);
+            MainFrame_4X4.setPlayer(2);
         }
 
     }
@@ -212,19 +264,19 @@ public class kernal3X3_HU_VS_HU {
             if (isRepeat(index) == true) {
                 continue;
             } else {
-                kernal3X3_HU_VS_HU.updateArrays(index);
+                kernal4X4_HU_VS_HU.updateArrays(index);
                 order.add(index);
-                MainFrame_3X3.getGUIedges().get(index).setFree(false);
-                MainFrame_3X3.getGUIedges().get(index).setColor(Color.BLUE);
-                MainFrame_3X3.getGUIedges().get(index).setVisible(true);
-                MainFrame_3X3.getGUIedges().get(index).repaint();
+                MainFrame_4X4.getGUIedges().get(index).setFree(false);
+                MainFrame_4X4.getGUIedges().get(index).setColor(Color.BLUE);
+                MainFrame_4X4.getGUIedges().get(index).setVisible(true);
+                MainFrame_4X4.getGUIedges().get(index).repaint();
                 break;
             }
         }
-        if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
+        if (testFour(currX, currY, MainFrame_4X4.getPlayer()) == true) {
 
         } else {
-            MainFrame_3X3.setPlayer(1);
+            MainFrame_4X4.setPlayer(1);
         }
 
     }
@@ -233,7 +285,7 @@ public class kernal3X3_HU_VS_HU {
         for (int i = 0; i < vectors2D.length; i++) {
             for (int j = 0; j < vectors2D[0].length; j++) {
                 System.out.printf("%-4d", vectors2D[i][j]);
-                if (j == 4) {
+                if (j == 6) {
                     System.out.print("\n");
                 }
             }
@@ -253,7 +305,7 @@ public class kernal3X3_HU_VS_HU {
         bReader.close();
         String str = buffer.toString();
         String[] SavedOrders = str.split(" ");
-        MainFrame_3X3.setPlayer(Integer.parseInt(SavedOrders[0]));
+        MainFrame_4X4.setPlayer(Integer.parseInt(SavedOrders[0]));
         for (int i = 1; i < SavedOrders.length; i++) {
             if (SavedOrders[i].equals("-1")) {
                 break;
@@ -269,14 +321,14 @@ public class kernal3X3_HU_VS_HU {
 //            player--;
 //        }
         for (int i = 0; i < order.size(); i++) {
-            kernal3X3_HU_VS_HU.updateArrays(order.get(i));
-            if (testFour(currX, currY, MainFrame_3X3.getPlayer()) == true) {
+            kernal4X4_HU_VS_HU.updateArrays(order.get(i));
+            if (testFour(currX, currY, MainFrame_4X4.getPlayer()) == true) {
 
             } else {
-                if (MainFrame_3X3.getPlayer() == 1) {
-                    MainFrame_3X3.setPlayer(2);
+                if (MainFrame_4X4.getPlayer() == 1) {
+                    MainFrame_4X4.setPlayer(2);
                 } else {
-                    MainFrame_3X3.setPlayer(1);
+                    MainFrame_4X4.setPlayer(1);
                 }
             }
         }
@@ -286,7 +338,7 @@ public class kernal3X3_HU_VS_HU {
 
     public void fileWrite() throws Exception {
         String OUT = "";
-        OUT = OUT + MainFrame_3X3.getPlayer() + " ";
+        OUT = OUT + MainFrame_4X4.getPlayer() + " ";
         for (int i = 0; i < order.size(); i++) {
             OUT = OUT + order.get(i) + " ";
             if (i == order.size() - 1) {
@@ -302,24 +354,22 @@ public class kernal3X3_HU_VS_HU {
         output.close();
     }
 
-    private static MainFrame_3X3 mainframe = new MainFrame_3X3();
-    public static String newGame = "";
-    public static int firstPlayer = -1;
+    private static MainFrame_4X4 mainframe = new MainFrame_4X4();
 
 
+    public static void main(String[] args) throws Exception {
 
-    public static void HU_VS_HU() throws Exception{
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
-        kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
+        kernal4X4_HU_VS_HU game = new kernal4X4_HU_VS_HU();
 
         System.out.println("New Game? Please input yes or no");
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
-                    "1 for player 1 and 2 for player 2");
+                    "1 for player and 2 for computer");
             int anumber = in.nextInt();
-            MainFrame_3X3.setPlayer(anumber);
+            MainFrame_4X4.setPlayer(anumber);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -329,7 +379,6 @@ public class kernal3X3_HU_VS_HU {
             if (isfull(order) == true) {
                 break;
             }
-            TimeUnit.SECONDS.sleep(1);
 
             game.show(vectors2D);
             System.out.println("\n");
@@ -337,9 +386,9 @@ public class kernal3X3_HU_VS_HU {
                 break;
             }
         }
-        System.out.println("Score of PLayer1 (human player 1) is:");
+        System.out.println("Score of PLayer1 is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 (human player 2) is:");
+        System.out.println("Score of Player2 is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +
@@ -358,20 +407,21 @@ public class kernal3X3_HU_VS_HU {
             System.out.println("Game Saved");
         }
         System.out.println("\nGame Over");
+
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void HU_VS_HU() throws Exception{
         mainframe.setVisible(true);
         Scanner in = new Scanner(System.in);
-        kernal3X3_HU_VS_HU game = new kernal3X3_HU_VS_HU();
+        kernal4X4_HU_VS_HU game = new kernal4X4_HU_VS_HU();
 
         System.out.println("New Game? Please input yes or no");
         String newgame = in.nextLine();
         if (newgame.toLowerCase().equals("yes")) {
             System.out.println("Which one do you want to play first?\n" +
-                    "1 for player 1 and 2 for player 2");
+                    "1 for player and 2 for computer");
             int anumber = in.nextInt();
-            MainFrame_3X3.setPlayer(anumber);
+            MainFrame_4X4.setPlayer(anumber);
         } else {
             game.fileread();
             game.SavedPlay();
@@ -391,7 +441,7 @@ public class kernal3X3_HU_VS_HU {
         }
         System.out.println("Score of PLayer1 (human player 1) is:");
         System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 (human player 2) is:");
+        System.out.println("Score of Player2 (computer) is:");
         System.out.println(scoreOfPlayer2 + "\n");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Do you want to save this game?\n" +
@@ -412,7 +462,3 @@ public class kernal3X3_HU_VS_HU {
         System.out.println("\nGame Over");
     }
 }
-
-
-
-

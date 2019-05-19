@@ -34,7 +34,7 @@ public class MainFrame_4X4 extends JFrame {
 
     private static ArrayList<EdgeComponent> GUIedges = new ArrayList<>();
     private static ArrayList<DotComponent> GUIdots = new ArrayList<>();
-    private Color currentColor;
+    public static  Color currentColor;
 
     public static int getPlayer() {
         return player;

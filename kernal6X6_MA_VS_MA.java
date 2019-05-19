@@ -493,7 +493,7 @@ public class kernal6X6_MA_VS_MA {
     }
 
     public void fileread() throws Exception {
-        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        String filepath = System.getProperty("user.dir")+ "/save6.txt";
         File file = new File(filepath);
         FileReader reader = new FileReader(file);
         BufferedReader bReader = new BufferedReader(reader);
@@ -515,11 +515,11 @@ public class kernal6X6_MA_VS_MA {
     }
 
     public void SavedPlay() throws Exception{
-//        if(player == 1){
-//            player++;
-//        }else{
-//            player--;
-//        }
+        if(MainFrame_6X6.getPlayer() == 1){
+            MainFrame_6X6.setPlayer(2);
+        }else{
+            MainFrame_6X6.setPlayer(1);
+        }
         for (int i = 0; i < order.size(); i++) {
             kernal6X6_MA_VS_MA.updateArrays(order.get(i));
             if(MainFrame_6X6.getPlayer() == 1){
@@ -553,7 +553,7 @@ public class kernal6X6_MA_VS_MA {
                 OUT = OUT + "-1 -1 ";
             }
         }
-        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        String filepath = System.getProperty("user.dir")+ "/save6.txt";
         File file = new File(filepath);
         file.createNewFile();
         BufferedWriter output = new BufferedWriter(new FileWriter(file));
@@ -564,66 +564,6 @@ public class kernal6X6_MA_VS_MA {
 
     private static MainFrame_6X6 mainframe = new MainFrame_6X6();
 
-
-    public static void main(String[] args) throws Exception {
-
-        mainframe.setVisible(true);
-        Scanner in = new Scanner(System.in);
-        kernal6X6_MA_VS_MA game = new kernal6X6_MA_VS_MA();
-
-        //Machine VS. Machine: Lock the mouse
-        for(int i = 0; i < MainFrame_6X6.getGUIedges().size(); i++){
-            MainFrame_6X6.getGUIedges().get(i).setFree(false);
-        }
-
-        String newgame = GamemodeSelect.newGame;
-        if (newgame.toLowerCase().equals("yes")) {
-            MainFrame_6X6.setPlayer(GamemodeSelect.playerFirst);
-        } else {
-            game.fileread();
-            game.SavedPlay();
-            game.show(vectors2D);
-        }
-        for (; ; ) {
-            if (isfull(order) == true) {
-                break;
-            }
-            if (MainFrame_6X6.getPlayer() == 1) {
-                game.computer1Play();
-                TimeUnit.SECONDS.sleep(1);
-            } else {
-                game.computer2Play();
-                TimeUnit.SECONDS.sleep(1);
-            }
-            game.show(vectors2D);
-            System.out.println("\n");
-            if (isfull(order) == true) {
-                break;
-            }
-        }
-        System.out.println("Score of PLayer1 is:");
-        System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
-        System.out.println(scoreOfPlayer2 + "\n");
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Do you want to save this game?\n" +
-                "yes or no");
-        String DoSave = "";
-        for(;;){
-            DoSave = in.nextLine();
-            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
-                break;
-            }
-        }
-        if (DoSave.toLowerCase().equals("no")) {
-        } else {
-            game.fileWrite();
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("Game Saved");
-        }
-        System.out.println("\nGame Over");
-
-    }
 
     public static void MA_VS_MA() throws Exception{
         mainframe.setVisible(true);

@@ -293,7 +293,7 @@ public class kernal4X4_HU_VS_HU {
     }
 
     public void fileread() throws Exception {
-        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        String filepath = System.getProperty("user.dir")+ "/save4.txt";
         File file = new File(filepath);
         FileReader reader = new FileReader(file);
         BufferedReader bReader = new BufferedReader(reader);
@@ -315,13 +315,17 @@ public class kernal4X4_HU_VS_HU {
     }
 
     public void SavedPlay() {
-//        if(player == 1){
-//            player++;
-//        }else{
-//            player--;
-//        }
         for (int i = 0; i < order.size(); i++) {
             kernal4X4_HU_VS_HU.updateArrays(order.get(i));
+            if(MainFrame_4X4.getPlayer() == 1){
+                MainFrame_4X4.currentColor = Color.RED;
+            }else{
+                MainFrame_4X4.currentColor = Color.BLUE;
+            }
+            MainFrame_4X4.getGUIedges().get(order.get(i)).setColor(MainFrame_4X4.currentColor);
+            MainFrame_4X4.getGUIedges().get(order.get(i)).setFree(false);
+            MainFrame_4X4.getGUIedges().get(order.get(i)).setVisible(true);
+            MainFrame_4X4.getGUIedges().get(order.get(i)).repaint();
             if (testFour(currX, currY, MainFrame_4X4.getPlayer()) == true) {
 
             } else {
@@ -345,7 +349,7 @@ public class kernal4X4_HU_VS_HU {
                 OUT = OUT + "-1 -1 ";
             }
         }
-        String filepath = System.getProperty("user.dir")+ "/save.txt";
+        String filepath = System.getProperty("user.dir")+ "/save4.txt";
         File file = new File(filepath);
         file.createNewFile();
         BufferedWriter output = new BufferedWriter(new FileWriter(file));
@@ -355,60 +359,6 @@ public class kernal4X4_HU_VS_HU {
     }
 
     private static MainFrame_4X4 mainframe = new MainFrame_4X4();
-
-
-    public static void main(String[] args) throws Exception {
-
-        mainframe.setVisible(true);
-        Scanner in = new Scanner(System.in);
-        kernal4X4_HU_VS_HU game = new kernal4X4_HU_VS_HU();
-
-        System.out.println("New Game? Please input yes or no");
-        String newgame = in.nextLine();
-        if (newgame.toLowerCase().equals("yes")) {
-            System.out.println("Which one do you want to play first?\n" +
-                    "1 for player and 2 for computer");
-            int anumber = in.nextInt();
-            MainFrame_4X4.setPlayer(anumber);
-        } else {
-            game.fileread();
-            game.SavedPlay();
-            game.show(vectors2D);
-        }
-        for (; ; ) {
-            if (isfull(order) == true) {
-                break;
-            }
-
-            game.show(vectors2D);
-            System.out.println("\n");
-            if (isfull(order) == true) {
-                break;
-            }
-        }
-        System.out.println("Score of PLayer1 is:");
-        System.out.println(scoreOfPlayer1 + "\n");
-        System.out.println("Score of Player2 is:");
-        System.out.println(scoreOfPlayer2 + "\n");
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Do you want to save this game?\n" +
-                "yes or no");
-        String DoSave = "";
-        for(;;){
-            DoSave = in.nextLine();
-            if(DoSave.toLowerCase().equals("yes") || DoSave.toLowerCase().equals("no")){
-                break;
-            }
-        }
-        if (DoSave.toLowerCase().equals("no")) {
-        } else {
-            game.fileWrite();
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("Game Saved");
-        }
-        System.out.println("\nGame Over");
-
-    }
 
     public static void HU_VS_HU() throws Exception{
         mainframe.setVisible(true);
